@@ -63,4 +63,5 @@ endef
 $(eval $(if $(DUMP),,$(call BuildPackage,kernel)))
 
 include $(sort $(wildcard ./modules/*.mk))
+include $(sort $(wildcard ./modules/media/*.mk))
 -include $(TOPDIR)/target/linux/*/modules.mk

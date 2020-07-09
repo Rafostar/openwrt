@@ -5,15 +5,20 @@
 # See /LICENSE for more information.
 #
 
-RC_MENU:=Remote Controller Support
+MEDIA_MENU:=Multimedia Support
+
+define AddDepends/rc
+  SUBMENU:=$(MEDIA_MENU)
+  DEPENDS+=+kmod-rc-core $(1)
+endef
 
 define KernelPackage/rc-core
-  SUBMENU:=$(RC_MENU)
+  SUBMENU:=$(MEDIA_MENU)
   TITLE:=Support for Remote Controllers
   DEPENDS:=+kmod-input-core
   KCONFIG:=CONFIG_RC_CORE
   FILES:=$(LINUX_DIR)/drivers/media/rc/rc-core.ko
-  AUTOLOAD:=$(call AutoLoad,50,rc-core)
+  AUTOLOAD:=$(call AutoProbe,rc-core)
 endef
 
 define KernelPackage/rc-core/description
